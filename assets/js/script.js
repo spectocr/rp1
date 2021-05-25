@@ -2,19 +2,12 @@
 var searchBoxLoc = "";
 var cityName = "";
 var country = "";
-var date = "";
-
-
-//FUNCTIONALITY TO PICK A DATE FROM A CALENDAR
-$(function(){
-    $( "#date-pick").datepicker({minDate: 0, maxDate: "+7D"});
-    date = $("#date-pick").val();
-    console.log(date);
-});
-
+var weatherDate = "";
+var longtitude = 0;
+var latitude = 0;
+var weatherObj = [];
 //--FIRST fetch the co-ordinates based on the name of the location
-function cityNameWeatherFetch() {
-
+function weatherFetch() {
     //DUMMY CITY NAME TO BE REPLACED WITH USER ENTRY FROM TEXT BOX
     searchBoxLoc = "Edison";
     //DUMMY CITY NAME ENDS
@@ -27,8 +20,8 @@ function cityNameWeatherFetch() {
                     //extract the city name and country from this first API
                     cityName = data.name;
                     country = data.sys.country;
-                    //push the coords into a new function to get a more complete API
-                    coordWeatherFetch(data.coord.lon, data.coord.lat);
+                    longtitude = data.coord.lon;
+                    latitude = data.coord.lat;
                 });
             }
 
@@ -37,21 +30,17 @@ function cityNameWeatherFetch() {
                 alert("INVALID ENTRY");
             }
         })
-};
 
-//--THEN a fetch to a different API using the co-ordinates of the named location. Returns a more complete weather profile
-function coordWeatherFetch(long, lati) {
-    fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + lati + "&lon=" + long + "&units=imperial&appid=2fd9f6120b1e5e49f6b0893e50ef57f6")
+    //--THEN a fetch to a different API using the co-ordinates of the named location. Returns a more complete weather profile
+    fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longtitude + "&units=imperial&appid=2fd9f6120b1e5e49f6b0893e50ef57f6")
         .then(function (response) {
             //check if there is a response then json the data to be sent for processing
             if (response.ok) {
-
                 response.json().then(function (data) {
                     //send the data to be rendered in HTML
-                    renderWeatherData(data);
+                    dateFinder(data);
                 });
             }
-
             //display error message if no response
             else {
                 alert("INVALID ENTRY");
@@ -60,13 +49,12 @@ function coordWeatherFetch(long, lati) {
 };
 
 //--LAST renders the weather data for the given location on a given date to the correct HTML container
-function renderWeatherData(data) {
+function renderWeatherData(data, date) {
 
     console.log(data);
-
     //insert the city name and country as well as an icon depicting the weather conditions
     var cityNameContainerEl = $("<h2>")
-        .text("City of: " + cityName + ", " + country + " ( + dateHandler(0) + )");
+        .text("City of: " + cityName + ", " + country + " (" + date + ")");
     var currentWeatherIcon = data.current.weather;
     currentWeatherIconEl = $("<img>")
         .attr("src", "http://openweathermap.org/img/wn/" + currentWeatherIcon[0].icon + "@2x.png");
@@ -125,5 +113,18 @@ function renderWeatherData(data) {
     };
 };
 
-//DEV-TEST runs the cityNameWeatherFetch function to populate the console
-cityNameWeatherFetch();
+//FUNCTIONALITY TO PICK A DATE FROM A CALENDAR
+$(function () {
+    $("#date-pick").datepicker({ minDate: 0, maxDate: "+7D" });
+});
+
+function dateFinder(data) {
+    weatherDate = $("#date-pick").val();
+    for (i = 1; i >= -1; i--) {
+        var dayPredict = new Date(weatherDate);
+        dayPredict.setDate(dayPredict.getDate() - i);
+        console.log(dayPredict);
+        renderWeatherData(data, dayPredict);
+    };
+};
+
