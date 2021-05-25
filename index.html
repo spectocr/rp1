@@ -17,12 +17,16 @@
 </head>
 
 <body>
-    <h1>Hello World</h1>
+    <h1>Weather By Date Functionality</h1>
 
-    <!-- DATE SEARCH BAR -->
+    <!-- DATE/PLACE SEARCH BAR -->
     <div class="date-search">
-        <span>Date: <input type="text" id="date-pick"></span>
-        <button id="date-finder" onClick="weatherFetch()">FIND</button>
+        <span class="date-searchbar">
+            <input type="button" class="date-button button"id="date-pick" value="DATE">
+            <input type="text" placeholder ="Enter a location...." id="city-pick">
+            <button class="button" id="date-finder" onClick="weatherFetch()">FIND</button>
+        </span>
+
 </body>
 <!-- WEATHER CONTAINER START -->
 <div id="weather-container" class="weather-container">

@@ -1,3 +1,13 @@
-.date-search {
+.date-searchbar {
+    display:flex;
+    align-self:center;
+}
 
+.date-button {
+    width:  100px;
+}
+.date-holder {
+    position:relative;
+    top: 7px;
+    margin:0 3px;
 }
