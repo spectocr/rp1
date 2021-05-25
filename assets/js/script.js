@@ -51,7 +51,12 @@ function weatherFetch() {
 //--LAST renders the weather data for the given location on a given date to the correct HTML container
 function renderWeatherData(data, date) {
 
-    console.log(data);
+    //date formatting
+    var dayName = new Date(date).toString().slice(0, 3);
+    var d = String(date.getDate()).padStart(2, '0');
+    var m = String(date.getMonth() + 1).padStart(2, '0');
+    date = dayName + ', ' + m + '/' + d;
+
     //insert the city name and country as well as an icon depicting the weather conditions
     var cityNameContainerEl = $("<h2>")
         .text("City of: " + cityName + ", " + country + " (" + date + ")");
