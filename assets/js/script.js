@@ -140,6 +140,8 @@ $(function () {
 
 function dateFinder(data) {
     weatherDate = $("#date-pick").val();
+    weatherDate.getTime();
+    console.log(weatherDate);
     for (i = 1; i >= -1; i--) {
         var dayPredict = new Date(weatherDate);
         dayPredict.setDate(dayPredict.getDate() - i);
