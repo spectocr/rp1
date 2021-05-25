@@ -50,12 +50,22 @@ function weatherFetch() {
 
 //--LAST renders the weather data for the given location on a given date to the correct HTML container
 function renderWeatherData(data, date) {
-
+    
     //date formatting
     var dayName = new Date(date).toString().slice(0, 3);
     var d = String(date.getDate()).padStart(2, '0');
     var m = String(date.getMonth() + 1).padStart(2, '0');
     date = dayName + ', ' + m + '/' + d;
+    //***********************************************************************************
+    //create a new card for each of the three days of weather IN FOUNDATION CSS. ALTER IF CSS IS CHANGED.
+    var weatherCardEl = $("<div>")
+        .addClass("card");
+    var weatherCardTitleEl = $("<div>")
+        .addClass("card-divider");
+    var weatherCardBodyEl = $("<div>")
+        .addClass("card-section");
+    var weatherCardFooterEl = $("<div>")
+        .addClass("card-divider card-footer");
 
     //insert the city name and country as well as an icon depicting the weather conditions
     var cityNameContainerEl = $("<h2>")
@@ -63,59 +73,64 @@ function renderWeatherData(data, date) {
     var currentWeatherIcon = data.current.weather;
     currentWeatherIconEl = $("<img>")
         .attr("src", "http://openweathermap.org/img/wn/" + currentWeatherIcon[0].icon + "@2x.png");
-    $("#cityname-header").append(cityNameContainerEl).append(currentWeatherIconEl);
+    $(weatherCardTitleEl).append(cityNameContainerEl).append(currentWeatherIconEl);
 
 
     //TEMPERATURE
-    var temperature = $("<span>")
+    var temperature = $("<div>")
         .text("Current temp: " + data.current.temp + "°F");
-    $("#temperature").append(temperature);
+    $(weatherCardBodyEl).append(temperature);
 
     //WINDSPEED
-    var windSpeed = $("<span>")
+    var windSpeed = $("<div>")
         .text("Wind Speed: " + data.current.wind_speed + " MPH");
-    $("#wind-speed").append(windSpeed);
+    $(weatherCardBodyEl).append(windSpeed);
 
     //HUMIDITY
-    var humidity = $("<span>")
+    var humidity = $("<div>")
         .text("Humidity: " + data.current.humidity + "%");
-    $("#humidity").append(humidity);
+    $(weatherCardBodyEl).append(humidity);
 
     //UV INDEX WITH DIFFERENT TEXT COLORS BASED ON SEVERITY
     if (data.current.uvi <= 2) {
-        var uvIndex = $("<span>")
+        var uvIndex = $("<div>")
             .addClass("text-success bg-dark")
             .text("UV Index: " + data.current.uvi);
-        $("#uvindex").append(uvIndex);
+        $(weatherCardFooterEl).append(uvIndex);
     }
 
     else if (data.current.uvi <= 5 && data.current.uvi > 2) {
-        var uvIndex = $("<span>")
+        var uvIndex = $("<div>")
             .addClass("text-warning bg-dark")
             .text("UV Index: " + data.current.uvi);
-        $("#uvindex").append(uvIndex);
+        $(weatherCardFooterEl).append(uvIndex);
     }
 
     else if (data.current.uvi <= 7 && data.current.uvi > 5) {
-        var uvIndex = $("<span>")
+        var uvIndex = $("<div>")
             .addClass("text-orange bg-dark")
             .text("UV Index: " + data.current.uvi);
-        $("#uvindex").append(uvIndex);
+        $(weatherCardFooterEl).append(uvIndex);
     }
 
     else if (data.current.uvi <= 10 && data.current.uvi > 7) {
-        var uvIndex = $("<span>")
+        var uvIndex = $("<div>")
             .addClass("text-danger bg-dark")
             .text("UV Index: " + data.current.uvi);
-        $("#uvindex").append(uvIndex);
+        $(weatherCardFooterEl).append(uvIndex);
     }
 
     else {
-        var uvIndex = $("<span>")
+        var uvIndex = $("<div>")
             .addClass("text-violet bg-dark")
             .text("UV Index: " + data.current.uvi);
-        $("#uvindex").append(uvIndex);
+        $(weatherCardFooterEl).append(uvIndex);
     };
+
+    $(weatherCardEl).append(weatherCardTitleEl);
+    $(weatherCardEl).append(weatherCardBodyEl);
+    $(weatherCardEl).append(weatherCardFooterEl);
+    $("#weather-container").append(weatherCardEl);
 };
 
 //FUNCTIONALITY TO PICK A DATE FROM A CALENDAR
@@ -128,7 +143,6 @@ function dateFinder(data) {
     for (i = 1; i >= -1; i--) {
         var dayPredict = new Date(weatherDate);
         dayPredict.setDate(dayPredict.getDate() - i);
-        console.log(dayPredict);
         renderWeatherData(data, dayPredict);
     };
 };
