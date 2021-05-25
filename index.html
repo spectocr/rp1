@@ -7,21 +7,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- ***CSS STYLE SHEETS*** -->
+    <!-- JQUERY STYLE SHEET -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- DEVELOPMENT STYLE SHEET -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
     <h1>Hello World</h1>
 
-
-    <!-- WEATHER CONTAINER START-->
-    <div id = "weather-container" class="weather-container"></div>
+    <!-- DATE SEARCH BAR -->
+    <p>Date: <input type="text" id="date-pick"></p>
+    <!-- WEATHER CONTAINER START -->
+    <div id="weather-container" class="weather-container">
+        <div id="cityname-header"></div>
+        <div id="temperature"></div>
+        <div id="wind-speed"></div>
+        <div id="humidity"></div>
+        <div id="uvindex"></div>
+    </div>
     <!-- WEATHER CONTAINER ENDS-->
 
 
     <!-- ***SCRIPTS*** -->
     <!-- JQUERY -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- JQUERY UI -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <!-- DEVELOPMENT JAVASCRIPT-->
     <script src="assets/js/script.js"></script>
 </body>
