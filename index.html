@@ -8,8 +8,7 @@
     <title>Vaction Tomorrow</title>
     <!-- ***CSS STYLE SHEETS*** -->
     <!-- FOUNDATION STYLE SHEET -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
-        integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/css/foundation.min.css">
     <!-- JQUERY STYLE SHEET -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- DEVELOPMENT STYLE SHEET -->
@@ -18,18 +17,19 @@
 
 <body>
     <h1>Hello World</h1>
-
+    <div class="row">
+        <div class="small-2 columns">2 columns</div>
+        <div class="small-10 columns">10 columns</div>
+      </div>
     <!-- DATE SEARCH BAR -->
     <div class="date-search">
         <span>Date: <input type="text" id="date-pick"></span>
         <button id="date-finder" onClick="weatherFetch()">FIND</button>
 
-
+    <div class="row">
+        <div class="small-3 columns">
         <!--flight departing city with date picker UI - CRS-->
         <div class="flightPicker">
-            <div id="placeholder">
-                <p>placeholder</p>
-            </div>
             <div id="origindescities">
                 <span>Leaving From:</span>
                 <input type="text" id="oriCity">
@@ -39,20 +39,22 @@
                 <input type="date" id="depDate">
                 <span>Return Date:</span>
                 <input type="date" id="retDate">
+                <button id="getGone">Get Gone!</button>
             </div>
         </div>
-
+        </div>
+    
 
         <!-- WEATHER CONTAINER START -->
-        <div id="weather-container" class="weather-container">
-            <div id="cityname-header"></div>
+        <div id="weather-container" class="weather-container small-9 columns">
+            <div id="cityname-header">test</div>
             <div id="temperature"></div>
             <div id="wind-speed"></div>
             <div id="humidity"></div>
             <div id="uvindex"></div>
         </div>
         <!-- WEATHER CONTAINER ENDS-->
-
+    </div> <!--end line 27s row-->
 
         <!-- ***SCRIPTS*** -->
 
