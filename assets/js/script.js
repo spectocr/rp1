@@ -6,6 +6,13 @@ var weatherDate = "";
 var longtitude = 0;
 var latitude = 0;
 var weatherObj = [];
+
+
+//CRS set departure date to tomorrow
+var tomorrow = moment().add(01, 'days').format('YYYY-MM-DD');
+$("#depDate").attr("value", tomorrow)
+console.log(tomorrow);
+
 //--FIRST fetch the co-ordinates based on the name of the location
 function weatherFetch() {
     //DUMMY CITY NAME TO BE REPLACED WITH USER ENTRY FROM TEXT BOX
