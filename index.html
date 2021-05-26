@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vaction Tomorrow</title>
     <!-- ***CSS STYLE SHEETS*** -->
-    <!-- FOUNDATION STYLE SHEET -->
+    <!-- FOUNDATION STYLE SHEET CRS, replaced link from before, wasn't working.-->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/css/foundation.min.css">
     <!-- JQUERY STYLE SHEET -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -17,17 +17,13 @@
 
 <body>
     <h1>Hello World</h1>
-    <div class="row">
-        <div class="small-2 columns">2 columns</div>
-        <div class="small-10 columns">10 columns</div>
-      </div>
     <!-- DATE SEARCH BAR -->
     <div class="date-search">
         <span>Date: <input type="text" id="date-pick"></span>
         <button id="date-finder" onClick="weatherFetch()">FIND</button>
 
     <div class="row">
-        <div class="small-3 columns">
+        <div class="outline large-3 columns">
         <!--flight departing city with date picker UI - CRS-->
         <div class="flightPicker">
             <div id="origindescities">
@@ -46,8 +42,8 @@
     
 
         <!-- WEATHER CONTAINER START -->
-        <div id="weather-container" class="weather-container small-9 columns">
-            <div id="cityname-header">test</div>
+        <div id="weather-container" class="weather-container outline large-9 columns">
+            <div id="cityname-header">Weather Area PlaceHolder </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></div>
             <div id="temperature"></div>
             <div id="wind-speed"></div>
             <div id="humidity"></div>
@@ -55,6 +51,17 @@
         </div>
         <!-- WEATHER CONTAINER ENDS-->
     </div> <!--end line 27s row-->
+
+    <div class="row">
+        <div class="large-12 columns" id="flightInfo">Flight Information *based on search criteria
+            <div class="row">
+                <div class="large-3 columns">Header: PH 1</div>
+                <div class="large-3 columns">Header: PH 2</div>
+                <div class="large-3 columns">Header: PH 3</div>
+                <div class="large-3 columns">Header: PH 4</div>
+            </div>
+        </div>
+    </div>
 
         <!-- ***SCRIPTS*** -->
 
