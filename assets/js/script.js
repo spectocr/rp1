@@ -88,7 +88,7 @@ function renderWeatherData(data, pDate, date) {
 
     //TEMPERATURE
     var temperature = $("<div>")
-        .text("Current temp: " + data.daily[date].temp.day + "°F");
+        .text("Temperature: " + data.daily[date].temp.day + "°F");
     $(weatherCardBodyEl).append(temperature);
 
     //WINDSPEED
@@ -100,8 +100,8 @@ function renderWeatherData(data, pDate, date) {
     var humidity = $("<div>")
         .text("Humidity: " + data.daily[date].humidity + "%");
     $(weatherCardBodyEl).append(humidity);
-
-    //UV INDEX WITH DIFFERENT TEXT COLORS BASED ON SEVERITY
+    //***LEGACY BOOTSTRAP CLASSES TO BE CHANGED***
+    //UV INDEX WITH DIFFERENT TEXT COLORS BASED ON SEVERITY 
     if (data.current.uvi <= 2) {
         var uvIndex = $("<div>")
             .addClass("text-success bg-dark")
