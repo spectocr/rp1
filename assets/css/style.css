@@ -1,0 +1,32 @@
+/*   adding some targeted CSS and color scheme variables CRS  */
+
+:root {
+    --primary: #ccdad1;
+    --secondary: #9caea9;
+    --tertiary: #788585;
+    --light-dark: #6f6866;
+    --buttons: #008CBA;
+    --dark: #38302e;  
+}
+
+.date-search {
+
+}
+
+.row {
+    margin: 0 0 0 5px;
+    max-width: 84.5rem;
+}
+
+.outline {
+    border: 2px solid black;
+}
+#getGone {
+    border-radius: 5px;
+    width: 100%;
+}
+
+#flightInfo {
+    border: 2px solid black;
+    margin-top: 10px;
+}
