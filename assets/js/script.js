@@ -155,14 +155,9 @@ function dateFinder(data) {
 
     var x = new Date();
     var currentDay = x.getTime()
-
     var dateDiff = chosenDay - currentDay;
     dateDiff = Math.ceil(dateDiff / 86400000);
-    console.log(dateDiff);
-
-    // for (i = 1; i >= -1; i--) {
-    //     var dayPredict = new Date(weatherDate);
-    //     dayPredict.setDate(dayPredict.getDate() - i);
+    
     renderWeatherData(data, weatherDate, dateDiff);
 };
 
