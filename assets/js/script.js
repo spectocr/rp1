@@ -14,6 +14,11 @@ $("#depDate").attr("value", tomorrow)
 
 // CRS query selectors
 var airline = document.getElementById('airline');
+var DepartureDate = document.getElementById('DepartureDate');
+var DirectFlight = document.getElementById('DirectFlight');
+var MinPrice = document.getElementById('MinPrice');
+
+
 console.log(airline);
 
 /// CRS fetch flight info.
@@ -29,10 +34,31 @@ fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices
     return response.json();
 })
 .then(function(json) {
+
     //create p for airline
     var airlinep = document.createElement("p");
     airline.appendChild(airlinep);
     airlinep.innerHTML = json.Carriers[0].Name;
+
+    //creat p for date
+    var DepartureDatep = document.createElement("p");
+    DepartureDate.appendChild(DepartureDatep);
+    var dateParser = json.Quotes[0].OutboundLeg.DepartureDate.split("T" , 1);
+    DepartureDatep.innerHTML = dateParser;
+
+    //create p for direct
+    var DirectFlightp = document.createElement("p");
+    DirectFlight.appendChild(DirectFlightp);
+    DirectFlightp.innerHTML = json.Quotes[0].Direct;
+
+    //create p for direct
+    var MinPricep = document.createElement("p");
+    MinPrice.appendChild(MinPricep);
+    MinPricep.innerHTML = "$" + json.Quotes[0].MinPrice;
+
+
+
+
     console.log(json)
 });
 
