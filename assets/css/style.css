@@ -1,6 +1,7 @@
 /*   adding some targeted CSS and color scheme variables CRS  */
 
 :root {
+    --light: #f3ede0;
     --primary: #ccdad1;
     --secondary: #9caea9;
     --tertiary: #788585;
@@ -9,7 +10,95 @@
     --dark: #38302e;  
 }
 
+/* apply styles to <header> */
+/* a:link {
+      color: #f3ede0;
+  } */
+/* 
+a:visited {
+    color: #9caea9;
+}
+
+a:hover {
+    color: #788585;
+} */
+
+/* apply styles to <header> */
+header {
+    padding: 20px 35px;
+    background-color: #008CBA;
+  }
+  
+  header h1 {
+    font-weight: bold;
+    font-size: 36px;
+    color: #ccdad1;
+    margin: 0;
+    display: inline;
+  }
+  header a {
+    text-decoration: none;
+    color: #ccdad1;
+  }
+  
+  header nav {
+    float: right;
+    margin: 7px 0;
+  }
+  
+  header nav ul li {
+    display: inline;
+  }
+  
+  header nav ul li a {
+    margin: 0 30px;
+    font-weight: lighter;
+    font-size: 22px;
+  }
+  
+  footer {
+    background: #ccdad1;
+    width: 100%;
+    padding: 40px 35px;
+  }
+  
+  footer h2 {
+    display: inline;
+    color: #024e76;
+    font-size: 30px;
+    margin: 0;
+  }
+  
+  footer div {
+    float: right;
+    line-height: 1.5;
+    text-align: right;
+  }
+  
+  footer a {
+    color: #024e76;
+  }
+  
+  section {
+    padding: 60px;
+  }
+
+  /* end header footer style */
+
+  /* Hero Style Start */
+.hero {
+    background-image: url('../images/header.png');
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+
+
+  /* Hero Style End */
+
 .date-search {
+    /* width: 30px; */
 
 }
 
