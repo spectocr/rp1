@@ -63,7 +63,7 @@ fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices
     //create p for direct
     var MinPricep = document.createElement("p");
     MinPrice.appendChild(MinPricep);
-    MinPrice.setAttribute("class" ,"flightJSON")
+    MinPricep.setAttribute("class" ,"flightJSON")
     MinPricep.innerHTML = "$" + json.Quotes[i].MinPrice;
     };
 

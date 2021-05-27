@@ -30,11 +30,13 @@
     border: 2px solid black;
     margin-top: 10px;
 }
-.flightHeaders {
-    color: purple;
-    text-decoration: underline;
+.flightHeaders h4 {
+    color: white;
+    background-color: purple;
+    border-radius: 5px;
+    text-align: center;
 }
-.flightJSON {
+.flightHeaders .flightJSON {
     color: var(--dark);
-    text-decoration: no underline;
+    text-align: center;
 }
