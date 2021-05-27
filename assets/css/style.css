@@ -47,6 +47,13 @@ header {
     font-weight: lighter;
     font-size: 22px;
   }
+
+  body {
+      background: var(--primary);
+  }
+
+  
+
   
 
   /* Footer styles */
@@ -70,12 +77,12 @@ header {
       list-style: none;
       width: 60px;
       height: 10px;
-      background: white;
+      /* background: white; */
       border-radius: var(--text-radius);
   }
 
   footer ul li:hover {
-      background: black;
+      /* background: black; */
   }
 
   /* placeholder for logo */
@@ -138,7 +145,7 @@ header {
     border: 2px solid black;
 }
 #getGone {
-    border-radius: 5px;
+    border-radius:30px;
     width: 100%;
 }
 
