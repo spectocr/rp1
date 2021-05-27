@@ -35,26 +35,37 @@ fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices
 })
 .then(function(json) {
 
+    for (var i = 0; i < json.Carriers.length; i++) {
     //create p for airline
     var airlinep = document.createElement("p");
     airline.appendChild(airlinep);
-    airlinep.innerHTML = json.Carriers[0].Name;
+    airlinep.setAttribute("class" ,"flightJSON")
+    airlinep.innerHTML = json.Carriers[i].Name;
 
     //creat p for date
     var DepartureDatep = document.createElement("p");
     DepartureDate.appendChild(DepartureDatep);
-    var dateParser = json.Quotes[0].OutboundLeg.DepartureDate.split("T" , 1);
+    DepartureDatep.setAttribute("class" ,"flightJSON")
+    var dateParser = json.Quotes[i].OutboundLeg.DepartureDate.split("T" , 1);
     DepartureDatep.innerHTML = dateParser;
 
     //create p for direct
     var DirectFlightp = document.createElement("p");
     DirectFlight.appendChild(DirectFlightp);
-    DirectFlightp.innerHTML = json.Quotes[0].Direct;
+    DirectFlightp.setAttribute("class" ,"flightJSON")
+    if (json.Quotes[i].Direct == true) {
+        DirectFlightp.innerHTML = "Yassss, we only fly direct"
+    } else {
+        DirectFlightp.innerHTML = "N"
+    };
+    //DirectFlightp.innerHTML = DirectFlight;
 
     //create p for direct
     var MinPricep = document.createElement("p");
     MinPrice.appendChild(MinPricep);
-    MinPricep.innerHTML = "$" + json.Quotes[0].MinPrice;
+    MinPrice.setAttribute("class" ,"flightJSON")
+    MinPricep.innerHTML = "$" + json.Quotes[i].MinPrice;
+    };
 
 
 
