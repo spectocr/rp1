@@ -9,10 +9,29 @@
     --dark: #38302e;  
 }
 
-.date-search {
-
+.weather-container {
+    display:flex;
+    background-color:var(--secondary);
+}
+#weather-title {
+    text-align: center;
+    background-color: var(--light-dark);
+    width:100%;    
 }
 
+.card {
+    margin:5px;
+    box-shadow: 1px 1px 1px black;
+}
+
+.card-divider {
+
+    background-color: var(--light-dark);
+}
+.card-body{
+    font-size: 12px;
+    background-color: var(--primary);
+}
 .row {
     margin: 0 0 0 5px;
     max-width: 84.5rem;
