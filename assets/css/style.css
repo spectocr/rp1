@@ -23,10 +23,19 @@ a:hover {
     color: #788585;
 } */
 
+
+body {
+    padding-top: 70px;
+}
+
+
 /* apply styles to <header> */
 header {
+    top: 0px;
     padding: 20px 35px;
-    background-color: #008CBA;
+    background-color: #6f6866;
+    position: fixed;
+    width: 100%;
   }
   
   header h1 {
@@ -91,7 +100,11 @@ header {
     height: 400px;
     background-size: cover;
     background-position: center;
-    position: relative;
+    padding-top: 60px;
+    margin-top: 39px;
+    /* position: absolute;
+    z-index: -1; */
+    /* position: relative; */
   }
 
 
