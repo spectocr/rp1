@@ -88,11 +88,13 @@ header {
   /* Hero Style Start */
 .hero {
     background-image: url('../images/header.png');
-    height: 600px;
+    height: 400px;
     background-size: cover;
     background-position: center;
     position: relative;
   }
+
+
   /* Hero Style End */
 
 .date-search {
