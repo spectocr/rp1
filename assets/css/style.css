@@ -14,14 +14,14 @@
 /* a:link {
       color: #f3ede0;
   } */
-
+/* 
 a:visited {
     color: #9caea9;
 }
 
 a:hover {
     color: #788585;
-}
+} */
 
 /* apply styles to <header> */
 header {
@@ -32,13 +32,13 @@ header {
   header h1 {
     font-weight: bold;
     font-size: 36px;
-    color: #fce138;
+    color: #ccdad1;
     margin: 0;
     display: inline;
   }
   header a {
     text-decoration: none;
-    color: #fce138;
+    color: #ccdad1;
   }
   
   header nav {
@@ -57,7 +57,7 @@ header {
   }
   
   footer {
-    background: #fce138;
+    background: #ccdad1;
     width: 100%;
     padding: 40px 35px;
   }
@@ -83,28 +83,20 @@ header {
     padding: 60px;
   }
 
+  /* end header footer style */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  /* Hero Style Start */
+.hero {
+    background-image: url('../images/header.png');
+    height: 600px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  /* Hero Style End */
 
 .date-search {
+    /* width: 30px; */
 
 }
 
