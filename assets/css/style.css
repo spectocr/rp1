@@ -182,3 +182,13 @@ header {
     border: 2px solid black;
     margin-top: 10px;
 }
+.flightHeaders h4 {
+    color: white;
+    background-color: purple;
+    border-radius: 5px;
+    text-align: center;
+}
+.flightHeaders .flightJSON {
+    color: var(--dark);
+    text-align: center;
+}
