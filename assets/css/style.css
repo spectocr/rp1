@@ -8,6 +8,7 @@
     --light-dark: #6f6866;
     --buttons: #008CBA;
     --dark: #38302e;  
+    --text-radius: 50em;
 }
 
 body {
@@ -47,12 +48,31 @@ header {
   }
   
   footer {
-    background: #ccdad1;
-    width: 100%;
-    padding: 40px 35px;
+     padding: 50px; 
+     width: 100%;
+     position: relative;
+     margin: 10px 0 0 0;
   }
-  
-  footer h2 {
+
+  footer nav {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translate(-50px, -50%);
+  }
+
+  footer ul li {
+      display: inline-block;
+      list-style: none;
+      width: 60px;
+      height: 10px;
+      background: #008CBA;
+      border-radius: var(--text-radius);
+  }
+
+
+
+  /* footer h2 {
     display: inline;
     color: #024e76;
     font-size: 30px;
@@ -67,7 +87,7 @@ header {
   
   footer a {
     color: #024e76;
-  }
+  } */
   
   section {
     padding: 60px;
