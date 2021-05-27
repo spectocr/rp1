@@ -57,6 +57,12 @@
     </section>
     <!-- DATE SEARCH BAR -->
 
+    <div class="date-search">
+        <span>Date: <input type="text" id="date-pick"></span>
+        <button id="date-finder" onClick="weatherFetch()">FIND</button>
+
+
+
 
         <div class="row">
             <div class="outline large-3 columns">
@@ -71,13 +77,23 @@
                         <input type="date" id="depDate">
                         <span>Return Date:</span>
                         <input type="date" id="retDate">
+
+                        <button id="getGone">Get Gone!</button>
+
                         <button id="getGone" class="success">Get Gone!</button>
+
                     </div>
                 </div>
             </div>
 
 
             <!-- WEATHER CONTAINER START -->
+
+            <div id="weather-continer">
+                <div id = "weather-title"></div>
+                <div id="weather-body" class="weather-container outline large-9 columns">
+                </div>
+
             <div id="weather-container" class="weather-container outline large-9 columns">
                 <div id="cityname-header">Weather Area PlaceHolder
                     </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></div>
@@ -85,6 +101,7 @@
                 <div id="wind-speed"></div>
                 <div id="humidity"></div>
                 <div id="uvindex"></div>
+
             </div>
             <!-- WEATHER CONTAINER ENDS-->
         </div>
@@ -103,6 +120,8 @@
                 </div>
             </div>
         </div>
+
+
 
         <!-- Footer class -->
         <footer class="footer">
@@ -124,6 +143,7 @@
                 </ul>
             </nav>
         </footer>
+
 
         <!-- ***SCRIPTS*** -->
 
