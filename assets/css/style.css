@@ -8,20 +8,24 @@
     --light-dark: #6f6866;
     --buttons: #008CBA;
     --dark: #38302e;  
+    --text-radius: 50em;
 }
 
-/* apply styles to <header> */
-/* a:link {
-      color: #f3ede0;
-  } */
-/* 
-a:visited {
-    color: #9caea9;
+
+.weather-container {
+    display:flex;
+    background-color:var(--secondary);
+}
+#weather-title {
+    text-align: center;
+    background-color: var(--light-dark);
+    width:100%;    
 }
 
-a:hover {
-    color: #788585;
-} */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
 
 
 body {
@@ -36,6 +40,11 @@ header {
     background-color: #6f6866;
     position: fixed;
     width: 100%;
+=======
+header {
+    padding: 20px;
+    background-color: #008CBA;
+
   }
   
   header h1 {
@@ -48,6 +57,7 @@ header {
   header a {
     text-decoration: none;
     color: #ccdad1;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
   
   header nav {
@@ -64,14 +74,62 @@ header {
     font-weight: lighter;
     font-size: 22px;
   }
+
+  body {
+      background: var(--primary);
+  }
+
   
+
+  
+
+  /* Footer styles */
   footer {
-    background: #ccdad1;
-    width: 100%;
-    padding: 40px 35px;
+     padding: 50px; 
+     width: 100%;
+     position: relative;
+     margin: 10px 0 0 0;
+     background: #008CBA;
+  }
+
+  footer nav {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translate(-50px, -50%);
+  }
+
+  footer ul li {
+      display: inline-block;
+      list-style: none;
+      width: 60px;
+      height: 10px;
+      /* background: white; */
+      border-radius: var(--text-radius);
+  }
+
+  footer ul li:hover {
+      /* background: black; */
+  }
+
+  /* placeholder for logo */
+  footer .logo {
+      background: white;
+      width: 50px;
+      height: 50px;
+      border-radius: var(--text-radius);
   }
   
-  footer h2 {
+
+  /* .company-logo {
+      width: 50px;
+      height: 50px;
+  } */
+
+
+
+
+  /* footer h2 {
     display: inline;
     color: #024e76;
     font-size: 30px;
@@ -86,7 +144,7 @@ header {
   
   footer a {
     color: #024e76;
-  }
+  } */
   
   section {
     padding: 60px;
@@ -113,8 +171,20 @@ header {
 .date-search {
     /* width: 30px; */
 
+
+.card {
+    margin:5px;
+    box-shadow: 1px 1px 1px black;
 }
 
+.card-divider {
+
+    background-color: var(--light-dark);
+}
+.card-body{
+    font-size: 12px;
+    background-color: var(--primary);
+}
 .row {
     margin: 0 0 0 5px;
     max-width: 84.5rem;
@@ -124,11 +194,21 @@ header {
     border: 2px solid black;
 }
 #getGone {
-    border-radius: 5px;
+    border-radius:30px;
     width: 100%;
 }
 
 #flightInfo {
     border: 2px solid black;
     margin-top: 10px;
+}
+.flightHeaders h4 {
+    color: white;
+    background-color: purple;
+    border-radius: 5px;
+    text-align: center;
+}
+.flightHeaders .flightJSON {
+    color: var(--dark);
+    text-align: center;
 }
