@@ -17,13 +17,18 @@ var airline = document.getElementById('airline');
 var DepartureDate = document.getElementById('DepartureDate');
 var DirectFlight = document.getElementById('DirectFlight');
 var MinPrice = document.getElementById('MinPrice');
-
+var country = "US";
+var currency = "USD";
+var destinationplace = "";
+var originplace = "";
+var outboundpartialdate = "";
 
 console.log(airline);
 
 /// CRS fetch flight info.
 
-fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/SFO-sky/ORD-sky/anytime", {
+fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/" 
++ country + "/" + currency + "/" + "en-US/" + originplace + "/" + destinationplace + "/" + outboundpartialdate + "," + {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-key": "a54ca3a1f3msh0c6896d0f1fe25ep12b2bajsn2f4c15928ba5",
@@ -72,25 +77,6 @@ fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices
 
     console.log(json)
 });
-
-
-var getFlightInfo = function() {
-    var apiUrl = "https://api.github.com/search/repositories?q=" + language + "+is:featured&sort=help-wanted-issues";
-    fetch(apiUrl).then(function(response) {
-        if (response.ok) {
-            response.json().then(function(data) {
-                displayRepos(data.items, language);
-                console.log(data);
-            });
-            console.log(response);
-        } else {
-            alert('error: gitgub user not found');
-        }
-
-    });
-    
-    
-  };
 
 //--FIRST fetch the co-ordinates based on the name of the location
 function weatherFetch() {
