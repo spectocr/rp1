@@ -35,9 +35,40 @@ fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices
 
 //console.log(airline);
 
-/// CRS fetch flight info.
+/* CRS fetch flight info.
 var testdynamicapicall = "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/" + country + "/" + currency + "/" + "en-US/" + originplace + "/" + destinationplace + '/anytime"';
 console.log(testdynamicapicall);
+above test code was just to get the flight price api call to be dynamic - below is looking to get possible place lookup in place - CRS 5\30 @ 1.22pm
+
+
+
+*/
+
+fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-US/?query=trenton", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "a54ca3a1f3msh0c6896d0f1fe25ep12b2bajsn2f4c15928ba5",
+		"x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+	}
+})
+.then(response => {
+    return response.json();
+	
+})
+.then(function(json) {
+
+    for (var i = 0; i < json.Places.length; i++) {
+    //create p for airline
+    //var airlinep = document.createElement("p");
+    //airline.appendChild(airlinep);
+    //airlinep.setAttribute("class" ,"flightJSON")
+    //airlinep.innerHTML = json.Places[i].Name;
+
+    console.log(json);
+    }})
+.catch(err => {
+	console.error(err);
+});
 
 fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/" + country + "/" + currency + "/" + "en-US/" + originplace + "/" + destinationplace + "/" + outboundpartialdate , {
 	"method": "GET",
