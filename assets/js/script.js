@@ -39,7 +39,7 @@ fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices
 var testdynamicapicall = "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/" + country + "/" + currency + "/" + "en-US/" + originplace + "/" + destinationplace + '/anytime"';
 console.log(testdynamicapicall);
 
-fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/" + country + "/" + currency + "/" + "en-US/" + originplace + "/" + destinationplace + '/anytime' , {
+fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/" + country + "/" + currency + "/" + "en-US/" + originplace + "/" + destinationplace + "/" + outboundpartialdate , {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-key": "a54ca3a1f3msh0c6896d0f1fe25ep12b2bajsn2f4c15928ba5",
