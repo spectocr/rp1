@@ -19,22 +19,33 @@ var DirectFlight = document.getElementById('DirectFlight');
 var MinPrice = document.getElementById('MinPrice');
 var country = "US";
 var currency = "USD";
-var destinationplace = "";
-var originplace = "";
-var outboundpartialdate = "";
+var destinationplace = "SFO-sky";
+var originplace = "ORD-sky";
+var outboundpartialdate = "anytime";
 
-console.log(airline);
-
-/// CRS fetch flight info.
-
-fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/" 
-+ country + "/" + currency + "/" + "en-US/" + originplace + "/" + destinationplace + "/" + outboundpartialdate + "," + {
+/*
+fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/SFO-sky/ORD-sky/anytime", {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-key": "a54ca3a1f3msh0c6896d0f1fe25ep12b2bajsn2f4c15928ba5",
 		"x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
 	}
 })
+*/ //working fetch above.
+
+//console.log(airline);
+
+/// CRS fetch flight info.
+var testdynamicapicall = "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/" + country + "/" + currency + "/" + "en-US/" + originplace + "/" + destinationplace + '/anytime"';
+console.log(testdynamicapicall);
+
+fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/" + country + "/" + currency + "/" + "en-US/" + originplace + "/" + destinationplace + '/anytime' , {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "a54ca3a1f3msh0c6896d0f1fe25ep12b2bajsn2f4c15928ba5",
+		"x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+	}
+}) 
 .then(function(response) {
     return response.json();
 })
