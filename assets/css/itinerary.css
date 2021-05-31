@@ -5,6 +5,7 @@ body {
     font-size: 16px;
     line-height: 1;
     padding-top: 70px;
+    background-color: #f3ede0;
   }
   
   textarea{
@@ -68,9 +69,7 @@ header nav ul li {
     font-size: 22px;
   }
 
-  body {
-      background: var(--primary);
-  }
+
 
   .hero {
     background-image: url('../images/header.png');
@@ -83,6 +82,29 @@ header nav ul li {
 
 
 /* end nav jumbotron and header, begin input */
+
+/* adding inline navigation to select amount of days traveling */
+
+#menu-outer {
+	height: 84px;
+}
+
+.table {
+	display: table;   /* Allow the centering to work */
+	margin: 0 auto;
+}
+
+ul#horizontal-list {
+	min-width: 696px;
+	list-style: none;
+	padding-top: 20px;
+	}
+
+ul#horizontal-list li {
+		display: inline;
+	}
+
+/* end inline nav */
   
   input {
     border: blue;
