@@ -44,7 +44,7 @@ above test code was just to get the flight price api call to be dynamic - below 
 
 */
 
-fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-US/?query=trenton", {
+fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-US/?query=" + destinationplace , {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-key": "a54ca3a1f3msh0c6896d0f1fe25ep12b2bajsn2f4c15928ba5",
@@ -63,9 +63,10 @@ fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices
     //airline.appendChild(airlinep);
     //airlinep.setAttribute("class" ,"flightJSON")
     //airlinep.innerHTML = json.Places[i].Name;
-
+    }
     console.log(json);
-    }})
+})
+    
 .catch(err => {
 	console.error(err);
 });
