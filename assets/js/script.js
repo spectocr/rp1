@@ -6,6 +6,7 @@ var weatherDate = "";
 var longtitude = 0;
 var latitude = 0;
 var weatherObj = [];
+var placeID = "";
 
 
 //CRS set departure date to tomorrow
@@ -19,7 +20,6 @@ var DirectFlight = document.getElementById('DirectFlight');
 var MinPrice = document.getElementById('MinPrice');
 var country = "US";
 var currency = "USD";
-var destinationplace = "SFO-sky";
 var originplace = "ORD-sky";
 var outboundpartialdate = "anytime";
 
@@ -43,16 +43,21 @@ above test code was just to get the flight price api call to be dynamic - below 
 
 
 */
-
-fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-US/?query=" + destinationplace , {
-	"method": "GET",
+//console.log(destinationplace);
+var getGone = function() {
+    var destCity = document.getElementById("destCity").value;
+    console.log(destCity);
+fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-US/?query=" + destCity , {
+	"method": "GET", 
 	"headers": {
 		"x-rapidapi-key": "a54ca3a1f3msh0c6896d0f1fe25ep12b2bajsn2f4c15928ba5",
 		"x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
 	}
-})
+    
+}) 
 .then(response => {
     return response.json();
+    
 	
 })
 .then(function(json) {
@@ -64,14 +69,20 @@ fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices
     //airlinep.setAttribute("class" ,"flightJSON")
     //airlinep.innerHTML = json.Places[i].Name;
     }
+    placeID = json.Places[0].PlaceId;
+    console.log(placeID);
+    getGone2(placeID);
     console.log(json);
 })
     
 .catch(err => {
 	console.error(err);
 });
+} // <-- end of getGone function
 
-fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/" + country + "/" + currency + "/" + "en-US/" + originplace + "/" + destinationplace + "/" + outboundpartialdate , {
+var getGone2 = function() {
+
+fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/" + country + "/" + currency + "/" + "en-US/" + originplace + "/" + placeID + "/" + outboundpartialdate , {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-key": "a54ca3a1f3msh0c6896d0f1fe25ep12b2bajsn2f4c15928ba5",
@@ -120,6 +131,8 @@ fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices
 
     console.log(json)
 });
+
+} //<-- end of getGone2 function.
 
 //--FIRST fetch the co-ordinates based on the name of the location
 function weatherFetch() {
@@ -261,4 +274,8 @@ function dateFinder(data) {
         renderWeatherData(data, dayPredict);
     };
 };
+
+$("#getGone").click( function() {
+    getGone();
+});
 
