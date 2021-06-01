@@ -233,7 +233,7 @@ function weatherFetch() {
             if (response.ok) {
                 response.json().then(function (data) {
                     //send the data to be rendered in HTML
-                    dateFinder(data);
+                    renderWeatherData(data);
                 });
             }
             //display error message if no response
