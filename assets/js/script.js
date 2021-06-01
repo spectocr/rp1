@@ -73,7 +73,7 @@ fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices
 
 
     console.log(json)
-});
+})
 
     .then(function (response) {
         return response.json();
