@@ -13,6 +13,10 @@ var placeID = "";
 var tomorrow = moment().add(01, 'days').format('YYYY-MM-DD');
 $("#depDate").attr("value", tomorrow)
 
+//CRS set return date for one week from tomorrow.
+var sevenDaysOut = moment().add(08, 'days').format('YYYY-MM-DD');
+$("#retDate").attr("value", tomorrow)
+
 // CRS query selectors
 var airline = document.getElementById('airline');
 var DepartureDate = document.getElementById('DepartureDate');
@@ -21,7 +25,7 @@ var MinPrice = document.getElementById('MinPrice');
 var country = "US";
 var currency = "USD";
 var originplace = "PHL-sky";
-var outboundpartialdate = "anytime";
+var outboundpartialdate = tomorrow;
 
 /*
 fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/SFO-sky/ORD-sky/anytime", {
@@ -93,6 +97,13 @@ fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices
     return response.json();
 })
 .then(function(json) {
+    console.log(json.Carriers.length);
+    if (json.Carriers.length == 0) {
+    var airlinep = document.createElement("p");
+    airline.appendChild(airlinep);
+    airlinep.setAttribute("class" ,"flightJSON")
+    airlinep.innerHTML = "No Flights";
+    } else {
     removeAllChildNodes(airline);
     removeAllChildNodes(DepartureDate); 
     removeAllChildNodes(DirectFlight); 
@@ -134,6 +145,7 @@ fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices
 
 
     console.log(json)
+} //<-- ending bracket for line 106 if.
 });
 
 } //<-- end of getGone2 function.
