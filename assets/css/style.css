@@ -195,7 +195,7 @@ header nav ul li {
 }
 .flightHeaders h4 {
     color: white;
-    background-color: purple;
+    background-color: var(--light-dark);
     border-radius: 5px;
     text-align: center;
 }

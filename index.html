@@ -22,22 +22,21 @@
         <span>Date: <input type="text" id="date-pick"></span>
         <button id="date-finder" onClick="weatherFetch()">FIND</button>
 
-        <div class="row">
-            <div class="outline large-3 columns">
-                <!--flight departing city with date picker UI - CRS-->
-                <div class="flightPicker">
-                    <div id="origindescities">
-                        <span>Leaving From:</span>
-                        <input type="text" id="oriCity">
-                        <span>Destination:</span>
-                        <input type="text" id="destCity">
-                        <span>Departure Date:</span>
-                        <input type="date" id="depDate">
-                        <span>Return Date:</span>
-                        <input type="date" id="retDate">
-                        <button id="getGone">Get Gone!</button>
-                    </div>
-                </div>
+    <div class="row">
+        <div class="outline large-3 columns">
+        <!--flight departing city with date picker UI - CRS-->
+        <div class="flightPicker">
+            <div id="origindescities">
+                <span>Leaving From:</span>
+                <input type="text" placeholder="Philidelphia" id="oriCity">
+                <span>Destination:</span>
+                <input type="text" placeholder="New York" id="destCity">
+                <span>Departure Date:</span>
+                <input type="date" id="depDate">
+                <span>Return Date:</span>
+                <input type="date" id="retDate">
+                <button id="getGone">Get Gone!</button>
+
             </div>
 
 
@@ -49,19 +48,29 @@
             </div>
             <!-- WEATHER CONTAINER ENDS-->
         </div>
-        <!--end line 27s row-->
 
-        <div class="row">
-            <div class="large-12 columns" id="flightInfo">Flight Information *based on search criteria
-                <div class="row">
-                    <div class="large-3 columns" id="airline">Header: PH 1
+        </div>
+    
 
-                    </div>
+        <!-- WEATHER CONTAINER START -->
+        <div id="weather-container" class="weather-container outline large-9 columns">
+            <div id="cityname-header">Weather Area PlaceHolder </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></div>
+            <div id="temperature"></div>
+            <div id="wind-speed"></div>
+            <div id="humidity"></div>
+            <div id="uvindex"></div>
+        </div>
+        <!-- WEATHER CONTAINER ENDS-->
+    </div> <!--end line 27s row-->
 
-                    <div class="large-3 columns">Header: PH 2</div>
-                    <div class="large-3 columns">Header: PH 3</div>
-                    <div class="large-3 columns">Header: PH 4</div>
-                </div>
+    <div class="row">
+        <div id="flightInfo">
+            <div class="row">
+                <div class="large-3 columns flightHeaders" id="airline"><h4>Airline</h4></div>
+                <div class="large-3 columns flightHeaders" id="DepartureDate"><h4>Departure Date</h4></div>
+                <div class="large-3 columns flightHeaders" id="DirectFlight"><h4>Direct Flight(Y/N)</h4></div>
+                <div class="large-3 columns flightHeaders" id="MinPrice" ><h4>Lowest Ticket $</h4></div>
+
             </div>
         </div>
 
