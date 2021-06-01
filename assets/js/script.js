@@ -155,6 +155,8 @@ function weatherFetch() {
 function renderWeatherData(data) {
 
     $("#weather-container").empty();
+    $("#weather-body").empty();
+    $("#weather-title").empty();
     // Card Title
     var cityNameContainerEl = $("<h2>")
         .text("City of: " + cityName + ", " + country);
