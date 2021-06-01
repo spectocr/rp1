@@ -216,7 +216,7 @@ function weatherFetch() {
                     country = data.sys.country;
                     longtitude = data.coord.lon;
                     latitude = data.coord.lat;
-                    coordWeather(latitude, longtitude);
+                    // coordWeather(latitude, longtitude);
                 });
             }
 
@@ -233,7 +233,7 @@ function weatherFetch() {
             if (response.ok) {
                 response.json().then(function (data) {
                     //send the data to be rendered in HTML
-                    dateFinder(data);
+                    renderWeatherData(data);
                 });
             }
             //display error message if no response
@@ -247,6 +247,8 @@ function weatherFetch() {
 function renderWeatherData(data) {
 
     $("#weather-container").empty();
+    $("#weather-body").empty();
+    $("#weather-title").empty();
     // Card Title
     var cityNameContainerEl = $("<h2>")
         .text("City of: " + cityName + ", " + country);
@@ -365,7 +367,5 @@ $("#getGone").click( function() {
 
 $("#oriCity").blur( function() {
     getOriginPlace();
-}
-
-)
+});
 
