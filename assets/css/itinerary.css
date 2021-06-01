@@ -17,13 +17,10 @@ body {
     padding: 10px;
   }
   
-  #jumbotron {
+  .jumbotron {
     text-align: center;
     background-color: transparent;
     color: black;
-    border-radius: 0;
-    border-bottom: 10px solid black;
-    
   }
 
   .description {
@@ -74,7 +71,7 @@ body {
     border-left: 1px solid black;
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
-    background-color: #06AED5;
+    background-color: #cbf5ff;
     color: white;
     text-align: center;
     height: 79px;
@@ -87,7 +84,7 @@ body {
   }
   
   button {
-    background-color: #06AED5; /* Green */
+    background-color: #c3f4ff; /* Green */
     border: none;
     color: white;
     padding: 15px 32px;
@@ -140,8 +137,6 @@ header nav ul li {
     font-size: 22px;
   }
 
-
-
   .hero {
     background-image: url('../images/header.png');
     height: 400px;
@@ -174,6 +169,11 @@ ul#horizontal-list {
 ul#horizontal-list li {
 		display: inline;
 	}
+
+.company-logo {
+    width: 200px;
+    height: 50px;
+}
 
 /* end inline nav */
 
