@@ -8,6 +8,10 @@ var latitude = 0;
 var weatherObj = [];
 var placeID = "";
 
+//***********EVENT LISTENERS FOR USER INPUT*******
+$("#getGone").on("click", function(){
+weatherFetch();
+});
 
 //CRS set departure date to tomorrow
 var tomorrow = moment().add(01, 'days').format('YYYY-MM-DD');
@@ -43,8 +47,6 @@ fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices
 var testdynamicapicall = "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/" + country + "/" + currency + "/" + "en-US/" + originplace + "/" + destinationplace + '/anytime"';
 console.log(testdynamicapicall);
 above test code was just to get the flight price api call to be dynamic - below is looking to get possible place lookup in place - CRS 5\30 @ 1.22pm
-
-
 
 */
 //console.log(destinationplace);
@@ -131,7 +133,9 @@ fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices
 }) 
 .then(function(response) {
     return response.json();
+
 })
+
 .then(function(json) {
     removeAllChildNodes(airline);
     removeAllChildNodes(DepartureDate); 
@@ -192,12 +196,14 @@ function removeAllChildNodes(parent) {
     while (parent.childNodes.length > 1) {
         parent.removeChild(parent.lastChild);
     }
+
 };
 
 //--FIRST fetch the co-ordinates based on the name of the location
 function weatherFetch() {
     //DUMMY CITY NAME TO BE REPLACED WITH USER ENTRY FROM TEXT BOX
-    searchBoxLoc = "Edison";
+    searchBoxLoc = $("#destCity").val();
+    console.log(searchBoxLoc);
     //DUMMY CITY NAME ENDS
 
     fetch("https://api.openweathermap.org/data/2.5/weather?q=" + searchBoxLoc + "&units=imperial&appid=2fd9f6120b1e5e49f6b0893e50ef57f6")
@@ -210,6 +216,7 @@ function weatherFetch() {
                     country = data.sys.country;
                     longtitude = data.coord.lon;
                     latitude = data.coord.lat;
+                    coordWeather(latitude, longtitude);
                 });
             }
 
@@ -234,106 +241,123 @@ function weatherFetch() {
                 alert("INVALID ENTRY"); /// i could be wrong, but didn't they say no alerts?
             }
         })
-};
 
+};
 //--LAST renders the weather data for the given location on a given date to the correct HTML container
-function renderWeatherData(data, date) {
-    
-    //date formatting
-    var dayName = new Date(date).toString().slice(0, 3);
-    var d = String(date.getDate()).padStart(2, '0');
-    var m = String(date.getMonth() + 1).padStart(2, '0');
-    date = dayName + ', ' + m + '/' + d;
-    //***********************************************************************************
-    //create a new card for each of the three days of weather IN FOUNDATION CSS. ALTER IF CSS IS CHANGED.
-    var weatherCardEl = $("<div>")
-        .addClass("card");
-    var weatherCardTitleEl = $("<div>")
-        .addClass("card-divider");
-    var weatherCardBodyEl = $("<div>")
-        .addClass("card-section");
-    var weatherCardFooterEl = $("<div>")
-        .addClass("card-divider card-footer");
+function renderWeatherData(data) {
 
-    //insert the city name and country as well as an icon depicting the weather conditions
+    $("#weather-container").empty();
+    // Card Title
     var cityNameContainerEl = $("<h2>")
-        .text("City of: " + cityName + ", " + country + " (" + date + ")");
-    var currentWeatherIcon = data.current.weather;
-    currentWeatherIconEl = $("<img>")
-        .attr("src", "http://openweathermap.org/img/wn/" + currentWeatherIcon[0].icon + "@2x.png");
-    $(weatherCardTitleEl).append(cityNameContainerEl).append(currentWeatherIconEl);
+        .text("City of: " + cityName + ", " + country);
+    $("#weather-title").append(cityNameContainerEl);
+
+    //date formatting and card rendering in a for loop so all 7 days are taken into account.
+    for (i = 0; i < 7; i++) {
+        var today = new Date();
+        today.setDate(today.getDate() + i);
+        var dayName = today.toString().slice(0, 3);
+        var d = String(today.getDate()).padStart(2, '0');
+        var m = String(today.getMonth() + 1).padStart(2, '0');
+        var date = dayName + ', ' + m + '/' + d;
 
 
-    //TEMPERATURE
-    var temperature = $("<div>")
-        .text("Current temp: " + data.current.temp + "°F");
-    $(weatherCardBodyEl).append(temperature);
+        //card creation
+        //create a new card for each of the three days of weather
+        var weatherCardEl = $("<div>")
+            .addClass("card");
+        var weatherCardTitleEl = $("<div>")
+            .addClass("card-divider");
+        var weatherCardBodyEl = $("<div>")
+            .addClass("card-section");
+        var weatherCardFooterEl = $("<div>")
+            .addClass("card-divider card-footer");
 
-    //WINDSPEED
-    var windSpeed = $("<div>")
-        .text("Wind Speed: " + data.current.wind_speed + " MPH");
-    $(weatherCardBodyEl).append(windSpeed);
+        //insert the city name and country as well as an icon depicting the weather conditions
+        var weatherDateEl = $("<div>")
+            .text(date);
+        $(weatherCardTitleEl).append(weatherDateEl);
 
-    //HUMIDITY
-    var humidity = $("<div>")
-        .text("Humidity: " + data.current.humidity + "%");
-    $(weatherCardBodyEl).append(humidity);
+        var weatherIcon = data.daily[i + 1].weather[0].icon;
+        var weatherIconEl = $("<img>")
+            .attr("src", "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png");
+        $(weatherCardTitleEl).append(weatherIconEl);
 
-    //UV INDEX WITH DIFFERENT TEXT COLORS BASED ON SEVERITY
-    if (data.current.uvi <= 2) {
-        var uvIndex = $("<div>")
-            .addClass("text-success bg-dark")
-            .text("UV Index: " + data.current.uvi);
-        $(weatherCardFooterEl).append(uvIndex);
-    }
 
-    else if (data.current.uvi <= 5 && data.current.uvi > 2) {
-        var uvIndex = $("<div>")
-            .addClass("text-warning bg-dark")
-            .text("UV Index: " + data.current.uvi);
-        $(weatherCardFooterEl).append(uvIndex);
-    }
+        //TEMPERATURE
+        var temperature = $("<div>")
+            .addClass("card-body")
+            .text("Temperature: " + data.daily[i + 1].temp.day + "°F");
+        $(weatherCardBodyEl).append(temperature);
 
-    else if (data.current.uvi <= 7 && data.current.uvi > 5) {
-        var uvIndex = $("<div>")
-            .addClass("text-orange bg-dark")
-            .text("UV Index: " + data.current.uvi);
-        $(weatherCardFooterEl).append(uvIndex);
-    }
+        //WINDSPEED
+        var windSpeed = $("<div>")
+            .addClass("card-body")
+            .text("Wind Speed: " + data.daily[i + 1].wind_speed + " MPH");
+        $(weatherCardBodyEl).append(windSpeed);
 
-    else if (data.current.uvi <= 10 && data.current.uvi > 7) {
-        var uvIndex = $("<div>")
-            .addClass("text-danger bg-dark")
-            .text("UV Index: " + data.current.uvi);
-        $(weatherCardFooterEl).append(uvIndex);
-    }
+        //HUMIDITY
+        var humidity = $("<div>")
+            .addClass("card-body")
+            .text("Humidity: " + data.daily[i + 1].humidity + "%");
+        $(weatherCardBodyEl).append(humidity);
 
-    else {
-        var uvIndex = $("<div>")
-            .addClass("text-violet bg-dark")
-            .text("UV Index: " + data.current.uvi);
-        $(weatherCardFooterEl).append(uvIndex);
+        //UV INDEX WITH DIFFERENT TEXT COLORS BASED ON SEVERITY
+        if (data.daily[i + 1].uvi <= 2) {
+            var uvIndex = $("<div>")
+                .addClass("card-footer")
+                .text("UV Index: " + data.daily[i + 1].uvi);
+            $(weatherCardFooterEl).append(uvIndex);
+        }
+
+        else if (data.daily[i + 1].uvi <= 5 && data.daily[i + 1].uvi > 2) {
+            var uvIndex = $("<div>")
+                .addClass("card-footer")
+                .text("UV Index: " + data.daily[i + 1].uvi);
+            $(weatherCardFooterEl).append(uvIndex);
+        }
+
+        else if (data.daily[i + 1].uvi <= 7 && data.daily[i + 1].uvi > 5) {
+            var uvIndex = $("<div>")
+                .addClass("card-footer")
+                .text("UV Index: " + data.daily[i + 1].uvi);
+            $(weatherCardFooterEl).append(uvIndex);
+        }
+
+        else if (data.daily[i + 1].uvi <= 10 && data.daily[i + 1].uvi > 7) {
+            var uvIndex = $("<div>")
+                .addClass("card-footer")
+                .text("UV Index: " + data.daily[i + 1].uvi);
+            $(weatherCardFooterEl).append(uvIndex);
+        }
+
+        else {
+            var uvIndex = $("<div>")
+                .addClass("card-footer")
+                .text("UV Index: " + data.daily[i + 1].uvi);
+            $(weatherCardFooterEl).append(uvIndex);
+        };
+
+        $(weatherCardEl).append(weatherCardTitleEl);
+        $(weatherCardEl).append(weatherCardBodyEl);
+        $(weatherCardEl).append(weatherCardFooterEl);
+        $("#weather-body").append(weatherCardEl);
     };
-
-    $(weatherCardEl).append(weatherCardTitleEl);
-    $(weatherCardEl).append(weatherCardBodyEl);
-    $(weatherCardEl).append(weatherCardFooterEl);
-    $("#weather-container").append(weatherCardEl);
 };
 
-//FUNCTIONALITY TO PICK A DATE FROM A CALENDAR
-$(function () {
-    $("#date-pick").datepicker({ minDate: 0, maxDate: "+7D" });
-});
+// //FUNCTIONALITY TO PICK A DATE FROM A CALENDAR *** DEPRECIATED
+// $(function () {
+//     $("#date-pick").datepicker({ minDate: 0, maxDate: "+7D" });
+// });
 
-function dateFinder(data) {
-    weatherDate = $("#date-pick").val();
-    for (i = 1; i >= -1; i--) {
-        var dayPredict = new Date(weatherDate);
-        dayPredict.setDate(dayPredict.getDate() - i);
-        renderWeatherData(data, dayPredict);
-    };
-};
+// function dateFinder(data) {
+//     weatherDate = $("#date-pick").val();
+//     for (i = 1; i >= -1; i--) {
+//         var dayPredict = new Date(weatherDate);
+//         dayPredict.setDate(dayPredict.getDate() - i);
+//         renderWeatherData(data, dayPredict);
+//     };
+// };
 
 $("#getGone").click( function() {
     getGone();
