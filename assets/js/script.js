@@ -48,6 +48,42 @@ above test code was just to get the flight price api call to be dynamic - below 
 
 */
 //console.log(destinationplace);
+var getOriginPlace = function() {
+    var oriCity = document.getElementById("oriCity").value;
+    console.log(oriCity);
+fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-US/?query=" + oriCity , {
+	"method": "GET", 
+	"headers": {
+		"x-rapidapi-key": "a54ca3a1f3msh0c6896d0f1fe25ep12b2bajsn2f4c15928ba5",
+		"x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+	}
+    
+}) 
+.then(response => {
+    return response.json();
+    
+	
+})
+.then(function(json) {
+
+    for (var i = 0; i < json.Places.length; i++) {
+    //create p for airline
+    //var airlinep = document.createElement("p");
+    //airline.appendChild(airlinep);
+    //airlinep.setAttribute("class" ,"flightJSON")
+    //airlinep.innerHTML = json.Places[i].Name;
+    }
+    placeID = json.Places[0].PlaceId;
+    console.log(placeID);
+    originplace = placeID;
+    console.log(json);
+})
+    
+.catch(err => {
+	console.error(err);
+});
+} // <-- end of getGone function
+
 var getGone = function() {
     var destCity = document.getElementById("destCity").value;
     console.log(destCity);
@@ -101,12 +137,12 @@ fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices
     removeAllChildNodes(DepartureDate); 
     removeAllChildNodes(DirectFlight); 
     removeAllChildNodes(MinPrice);
-    
+
     if (json.Carriers.length == 0) {
     var airlinep = document.createElement("p");
     airline.appendChild(airlinep);
     airlinep.setAttribute("class" ,"flightJSON")
-    airlinep.innerHTML = "No Flights";
+    airlinep.innerHTML = "No flights, try another city";
     } else {
      
 
@@ -195,7 +231,7 @@ function weatherFetch() {
             }
             //display error message if no response
             else {
-                alert("INVALID ENTRY");
+                alert("INVALID ENTRY"); /// i could be wrong, but didn't they say no alerts?
             }
         })
 };
@@ -302,4 +338,10 @@ function dateFinder(data) {
 $("#getGone").click( function() {
     getGone();
 });
+
+$("#oriCity").blur( function() {
+    getOriginPlace();
+}
+
+)
 
