@@ -6,6 +6,7 @@ var weatherDate = "";
 var longtitude = 0;
 var latitude = 0;
 var weatherObj = [];
+var placeID = "";
 
 //***********EVENT LISTENERS FOR USER INPUT*******
 $("#getGone").on("click", function(){
@@ -16,26 +17,138 @@ weatherFetch();
 var tomorrow = moment().add(01, 'days').format('YYYY-MM-DD');
 $("#depDate").attr("value", tomorrow)
 
+//CRS set return date for one week from tomorrow.
+var sevenDaysOut = moment().add(08, 'days').format('YYYY-MM-DD');
+$("#retDate").attr("value", tomorrow)
+
 // CRS query selectors
 var airline = document.getElementById('airline');
 var DepartureDate = document.getElementById('DepartureDate');
 var DirectFlight = document.getElementById('DirectFlight');
 var MinPrice = document.getElementById('MinPrice');
+var country = "US";
+var currency = "USD";
+var originplace = "PHL-sky";
+var outboundpartialdate = tomorrow;
 
-
-console.log(airline);
-
-/// CRS fetch flight info.
-
+/*
 fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/SFO-sky/ORD-sky/anytime", {
-    "method": "GET",
-    "headers": {
-        "x-rapidapi-key": "a54ca3a1f3msh0c6896d0f1fe25ep12b2bajsn2f4c15928ba5",
-        "x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "a54ca3a1f3msh0c6896d0f1fe25ep12b2bajsn2f4c15928ba5",
+		"x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+	}
+})
+*/ //working fetch above.
+
+//console.log(airline);
+
+/* CRS fetch flight info.
+var testdynamicapicall = "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/" + country + "/" + currency + "/" + "en-US/" + originplace + "/" + destinationplace + '/anytime"';
+console.log(testdynamicapicall);
+above test code was just to get the flight price api call to be dynamic - below is looking to get possible place lookup in place - CRS 5\30 @ 1.22pm
+
+*/
+//console.log(destinationplace);
+var getOriginPlace = function() {
+    var oriCity = document.getElementById("oriCity").value;
+    console.log(oriCity);
+fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-US/?query=" + oriCity , {
+	"method": "GET", 
+	"headers": {
+		"x-rapidapi-key": "a54ca3a1f3msh0c6896d0f1fe25ep12b2bajsn2f4c15928ba5",
+		"x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+	}
+    
+}) 
+.then(response => {
+    return response.json();
+    
+	
+})
+.then(function(json) {
+
+    for (var i = 0; i < json.Places.length; i++) {
+    //create p for airline
+    //var airlinep = document.createElement("p");
+    //airline.appendChild(airlinep);
+    //airlinep.setAttribute("class" ,"flightJSON")
+    //airlinep.innerHTML = json.Places[i].Name;
     }
+    placeID = json.Places[0].PlaceId;
+    console.log(placeID);
+    originplace = placeID;
+    console.log(json);
+})
+    
+.catch(err => {
+	console.error(err);
+});
+} // <-- end of getGone function
+
+var getGone = function() {
+    var destCity = document.getElementById("destCity").value;
+    console.log(destCity);
+fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-US/?query=" + destCity , {
+	"method": "GET", 
+	"headers": {
+		"x-rapidapi-key": "a54ca3a1f3msh0c6896d0f1fe25ep12b2bajsn2f4c15928ba5",
+		"x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+	}
+    
+}) 
+.then(response => {
+    return response.json();
+    
+	
+})
+.then(function(json) {
+
+    for (var i = 0; i < json.Places.length; i++) {
+    //create p for airline
+    //var airlinep = document.createElement("p");
+    //airline.appendChild(airlinep);
+    //airlinep.setAttribute("class" ,"flightJSON")
+    //airlinep.innerHTML = json.Places[i].Name;
+    }
+    placeID = json.Places[0].PlaceId;
+    console.log(placeID);
+    getGone2(placeID);
+    console.log(json);
+})
+    
+.catch(err => {
+	console.error(err);
+});
+} // <-- end of getGone function
+
+var getGone2 = function() {
+
+fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/" + country + "/" + currency + "/" + "en-US/" + originplace + "/" + placeID + "/" + outboundpartialdate , {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "a54ca3a1f3msh0c6896d0f1fe25ep12b2bajsn2f4c15928ba5",
+		"x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+	}
+}) 
+.then(function(response) {
+    return response.json();
+
 })
 
 .then(function(json) {
+    removeAllChildNodes(airline);
+    removeAllChildNodes(DepartureDate); 
+    removeAllChildNodes(DirectFlight); 
+    removeAllChildNodes(MinPrice);
+
+    if (json.Carriers.length == 0) {
+    var airlinep = document.createElement("p");
+    airline.appendChild(airlinep);
+    airlinep.setAttribute("class" ,"flightJSON")
+    airlinep.innerHTML = "No flights, try another city";
+    } else {
+     
 
     for (var i = 0; i < json.Carriers.length; i++) {
     //create p for airline
@@ -44,7 +157,7 @@ fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices
     airlinep.setAttribute("class" ,"flightJSON")
     airlinep.innerHTML = json.Carriers[i].Name;
 
-    //creat p for date
+    //create p for date
     var DepartureDatep = document.createElement("p");
     DepartureDate.appendChild(DepartureDatep);
     DepartureDatep.setAttribute("class" ,"flightJSON")
@@ -73,36 +186,16 @@ fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices
 
 
     console.log(json)
+} //<-- ending bracket for line 106 if.
 });
 
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (json) {
-        //create p for airline
-        var airlinep = document.createElement("p");
-        airline.appendChild(airlinep);
-        airlinep.innerHTML = json.Carriers[0].Name;
-        console.log(json)
-    });
+} //<-- end of getGone2 function.
 
-
-
-var getFlightInfo = function () {
-    var apiUrl = "https://api.github.com/search/repositories?q=" + language + "+is:featured&sort=help-wanted-issues";
-    fetch(apiUrl).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (data) {
-                displayRepos(data.items, language);
-                console.log(data);
-            });
-            console.log(response);
-        } else {
-            alert('error: gitgub user not found');
-        }
-
-    });
-
+//CRS clear out previous destination search.
+function removeAllChildNodes(parent) {
+    while (parent.childNodes.length > 1) {
+        parent.removeChild(parent.lastChild);
+    }
 
 };
 
@@ -134,22 +227,21 @@ function weatherFetch() {
         })
 
     //--THEN a fetch to a different API using the co-ordinates of the named location. Returns a more complete weather profile
-    function coordWeather(lat, lon) {
-        fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=2fd9f6120b1e5e49f6b0893e50ef57f6")
-            .then(function (response) {
-                //check if there is a response then json the data to be sent for processing
-                if (response.ok) {
-                    response.json().then(function (data) {
-                        //send the data to be rendered in HTML
-                        renderWeatherData(data);
-                    });
-                }
-                //display error message if no response
-                else {
-                    alert("INVALID ENTRY");
-                }
-            })
-    };
+    fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longtitude + "&units=imperial&appid=2fd9f6120b1e5e49f6b0893e50ef57f6")
+        .then(function (response) {
+            //check if there is a response then json the data to be sent for processing
+            if (response.ok) {
+                response.json().then(function (data) {
+                    //send the data to be rendered in HTML
+                    dateFinder(data);
+                });
+            }
+            //display error message if no response
+            else {
+                alert("INVALID ENTRY"); /// i could be wrong, but didn't they say no alerts?
+            }
+        })
+
 };
 //--LAST renders the weather data for the given location on a given date to the correct HTML container
 function renderWeatherData(data) {
@@ -266,4 +358,14 @@ function renderWeatherData(data) {
 //         renderWeatherData(data, dayPredict);
 //     };
 // };
+
+$("#getGone").click( function() {
+    getGone();
+});
+
+$("#oriCity").blur( function() {
+    getOriginPlace();
+}
+
+)
 
