@@ -20,7 +20,7 @@ var DirectFlight = document.getElementById('DirectFlight');
 var MinPrice = document.getElementById('MinPrice');
 var country = "US";
 var currency = "USD";
-var originplace = "ORD-sky";
+var originplace = "PHL-sky";
 var outboundpartialdate = "anytime";
 
 /*
@@ -93,6 +93,10 @@ fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices
     return response.json();
 })
 .then(function(json) {
+    removeAllChildNodes(airline);
+    removeAllChildNodes(DepartureDate); 
+    removeAllChildNodes(DirectFlight); 
+    removeAllChildNodes(MinPrice); 
 
     for (var i = 0; i < json.Carriers.length; i++) {
     //create p for airline
@@ -101,7 +105,7 @@ fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices
     airlinep.setAttribute("class" ,"flightJSON")
     airlinep.innerHTML = json.Carriers[i].Name;
 
-    //creat p for date
+    //create p for date
     var DepartureDatep = document.createElement("p");
     DepartureDate.appendChild(DepartureDatep);
     DepartureDatep.setAttribute("class" ,"flightJSON")
@@ -133,6 +137,13 @@ fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices
 });
 
 } //<-- end of getGone2 function.
+
+//CRS clear out previous destination search.
+function removeAllChildNodes(parent) {
+    while (parent.childNodes.length > 1) {
+        parent.removeChild(parent.lastChild);
+    }
+};
 
 //--FIRST fetch the co-ordinates based on the name of the location
 function weatherFetch() {
