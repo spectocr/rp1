@@ -97,17 +97,18 @@ fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices
     return response.json();
 })
 .then(function(json) {
-    console.log(json.Carriers.length);
+    removeAllChildNodes(airline);
+    removeAllChildNodes(DepartureDate); 
+    removeAllChildNodes(DirectFlight); 
+    removeAllChildNodes(MinPrice);
+    
     if (json.Carriers.length == 0) {
     var airlinep = document.createElement("p");
     airline.appendChild(airlinep);
     airlinep.setAttribute("class" ,"flightJSON")
     airlinep.innerHTML = "No Flights";
     } else {
-    removeAllChildNodes(airline);
-    removeAllChildNodes(DepartureDate); 
-    removeAllChildNodes(DirectFlight); 
-    removeAllChildNodes(MinPrice); 
+     
 
     for (var i = 0; i < json.Carriers.length; i++) {
     //create p for airline
